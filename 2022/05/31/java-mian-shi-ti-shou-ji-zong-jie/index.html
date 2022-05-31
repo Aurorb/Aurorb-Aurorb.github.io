@@ -474,7 +474,7 @@ String、StringBuffer是线程安全的，StringBuilder是线程不安全的（�
 2.三个类都被final修饰，因此都是不可继承的<br>
 3.StringBuilder与StringBuffer有公共父类AbstractStringBuilder(抽象类)</details>
 <h3 id="intern方法及String对象数目">intern方法及String对象数目</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Programming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Programming&quot;</span>);</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span> + <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s3 + s4; </span><br><span class="line"> System.out.println(s1 == s2); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s5); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s1 == s6); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s6.intern()); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s2 == s2.intern()); <span class="comment">//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据下面代码判断输出结果</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Programming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Programming&quot;</span>);</span><br><span class="line">	<span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span> + <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s3 + s4;</span><br><span class="line">    System.out.println(s1 == s2);</span><br><span class="line">    System.out.println(s1 == s5);</span><br><span class="line">    System.out.println(s1 == s6);</span><br><span class="line">    System.out.println(s1 == s6.intern());</span><br><span class="line">    System.out.println(s2 == s2.intern()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <details>
     <summary>答案</summary>
     false<br>
@@ -490,53 +490,41 @@ String、StringBuffer是线程安全的，StringBuilder是线程不安全的（�
     答案：创建4个String对象<br>
     分析：JVM先在String池中创建2个String对象存储"abc"和"def"，遇到new关键字，再在内存堆上创建1个String对象存储"def"，其char value[]则指向常量池中的char value[]；两个字符串相加会在堆上创建1个String对象"abcdef"。（因为没有显式使用双引号指定，也没有调用intern，所以字符串池里边目前没有“abcdef”对象）</details>
 <h3 id="如何修改String对象的数据？">如何修改String对象的数据？</h3>
-<p>不可变的含义是内部数据不可变，而不是说引用不可变。</p>
-<p>String类使用char value[]来存字符数据，它的类型为：private final char value[];</p>
-<p>看上去它是不可更改的，因为是final类型。注意：final只是表示不能指向其他地址，它里边的内容是可以更改的。</p>
-<p>结论：String是可以更改的，使用反射，value.setAccessible(true)，然后修改它即可。</p>
+<details>
+    <summary>答案</summary>
+不可变的含义是内部数据不可变，而不是说引用不可变。<br>
+String类使用char value[]来存字符数据，它的类型为：private final char value[];<br>
+看上去它是不可更改的，因为是final类型。注意：final只是表示不能指向其他地址，它里边的内容是可以更改的。<br>
+结论：String是可以更改的，使用反射，value.setAccessible(true)，然后修改它即可。</details>
 <h2 id="Static">Static</h2>
 <h3 id="static的5种用法">static的5种用法</h3>
-<ol>
-<li class="lvl-3">
-<p>修饰静态属性；</p>
-</li>
-<li class="lvl-3">
-<p>修饰静态方法；</p>
-</li>
-<li class="lvl-3">
-<p>修饰静态内部类；</p>
-</li>
-<li class="lvl-3">
-<p>静态导包（类或者方法，可以通配）；</p>
-</li>
-<li class="lvl-3">
-<p>标记静态代码块。</p>
-</li>
-</ol>
+<details>
+    <summary>答案</summary>
+1. 修饰静态属性；<br>
+2. 修饰静态方法；<br>
+3. 修饰静态内部类；<br>
+4. 静态导包（类或者方法，可以通配）；<br>
+5. 标记静态代码块。</details>
 <h3 id="为什么静态方法不能调用非静态方法和变量？">为什么静态方法不能调用非静态方法和变量？</h3>
-<p>与类加载顺序有关，加载静态方法时，非静态的未初始化。</p>
+<details>
+    <summary>答案</summary>
+与类加载顺序有关，加载静态方法时，非静态的未初始化。</details>
 <h3 id="synchronized用于静态方法与普通方法有区别吗？">synchronized用于静态方法与普通方法有区别吗？</h3>
-<p>synchronized修饰普通方法时用的锁是this，即以当前对象为锁。用static修饰的同步函数使用的锁为Saler.class。即当前类为锁。这是由于static修饰的方法在进行类加载时不一定在堆内存中产生类的实例对象，但一定会有该类的的字节码文件对象所以用static修饰的同步函数使用的锁是类名.class。</p>
+<details>
+    <summary>答案</summary>
+synchronized修饰普通方法时用的锁是this，即以当前对象为锁。用static修饰的同步函数使用的锁为Saler.class。即当前类为锁。这是由于static修饰的方法在进行类加载时不一定在堆内存中产生类的实例对象，但一定会有该类的的字节码文件对象所以用static修饰的同步函数使用的锁是类名.class。</details>
 <h2 id="异常">异常</h2>
 <h3 id="异常类型">异常类型</h3>
 <p><img src="./001.png" alt="./001.png"></p>
 <h3 id="catch里return了，finally是否执行？">catch里return了，finally是否执行？</h3>
-<p>finally一定会执行</p>
-<p>try-catch-finally中return的执行情况：</p>
-<ol>
-<li class="lvl-3">
-<p>在try中没有异常的情况下try、catch、finally的执行顺序 try — finally</p>
-</li>
-<li class="lvl-3">
-<p>如果try中有异常，执行顺序是try — catch — finally</p>
-</li>
-<li class="lvl-3">
-<p>如果try中没有异常并且try中有return这时候正常执行顺序是try ---- finally — return</p>
-</li>
-<li class="lvl-3">
-<p>如果try中有异常并且try中有return这时候正常执行顺序是try----catch—finally— return</p>
-</li>
-</ol>
+<details>
+    <summary>答案</summary>
+finally一定会执行<br>
+try-catch-finally中return的执行情况：<br>
+1. 在try中没有异常的情况下try、catch、finally的执行顺序 try --- finally<br>
+2. 如果try中有异常，执行顺序是try --- catch --- finally<br>
+3. 如果try中没有异常并且try中有return这时候正常执行顺序是try ---- finally --- return<br>
+4. 如果try中有异常并且try中有return这时候正常执行顺序是try----catch---finally--- return</details>
 <h2 id="IO">IO</h2>
 <h3 id="字节流与字符流区别？">字节流与字符流区别？</h3>
 <table>
@@ -603,7 +591,9 @@ String、StringBuffer是线程安全的，StringBuilder是线程不安全的（�
 </table>
 <h2 id="JDK8">JDK8</h2>
 <h3 id="JDK8新特性">JDK8<strong>新特性</strong></h3>
-<p>接口允许default和static；lambda；stream；时间新API（LocalDateTime等）CompletableFuture；等</p>
+<details>
+    <summary>答案</summary>
+接口允许default和static；lambda；stream；时间新API（LocalDateTime等）CompletableFuture；等</details>
 <h3 id="JDK8接口的default和static">JDK8接口的default和static</h3>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface InterfaceDemo &#123;</span><br><span class="line">    // static修饰符定义静态方法  </span><br><span class="line">    static void staticMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的静态方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // default修饰符定义默认方法  </span><br><span class="line">    default void defaultMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的默认方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>一、default</p>
@@ -611,13 +601,15 @@ String、StringBuffer是线程安全的，StringBuilder是线程不安全的（�
 <p>二、static</p>
 <p>static就是常规的静态方法，允许通过接口直接调用，不能通过实现类去调用，跟普通的类的静态方法一样的用法。</p>
 <h3 id="JDK8-Stream-API-流操作包括哪些部分？项目中怎么用的Stream？">JDK8 Stream API 流操作包括哪些部分？项目中怎么用的Stream？</h3>
-<p>Stream操作步骤</p>
-<p>创建Stream=&gt; 转换Stream（中间操作）=&gt; 产生结果（终止操作）</p>
-<p>注意：这只是一般操作。实际编程时，创建必须有，而中间操作与终止操作是可选的。</p>
-<p><code>Stream</code> 流可以通过集合和数组进行创建！<br>
-1、通过 <code>java.util.Collection.stream()</code> 方法用集合创建流</p>
-<p>2、使用 <code>java.util.Arrays.stream(T[] array)</code> 方法用数组创建流</p>
-<p>3、使用Stream的静态方法：<code>of()、iterate()、generate()</code></p>
+<details>
+    <summary>答案</summary>
+Stream操作步骤<br>
+创建Stream=> 转换Stream（中间操作）=> 产生结果（终止操作）<br>
+注意：这只是一般操作。实际编程时，创建必须有，而中间操作与终止操作是可选的。<br>
+`Stream` 流可以通过集合和数组进行创建！<br>
+1、通过 `java.util.Collection.stream()` 方法用集合创建流<br>
+2、使用 `java.util.Arrays.stream(T[] array)` 方法用数组创建流<br>
+3、使用Stream的静态方法：`of()、iterate()、generate()`</details>
 <h2 id="语法">语法</h2>
 <h3 id="项目中对泛型的使用">项目中对泛型的使用</h3>
 <h3 id="抽象类与接口的区别？">抽象类与接口的区别？</h3>
