@@ -455,36 +455,40 @@
 <h1>基础</h1>
 <h2 id="String">String</h2>
 <h3 id="String的replace与replaceall区别？">String的replace与replaceall区别？</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>replace：替换字符串</p>
-</li>
-<li class="lvl-2">
-<p>replaceAll：根据正则表达式替换字符串</p>
-</li>
-</ul>
+<details>
+    <summary>答案</summary>
+    - replace：替换字符串<br>
+    - replaceAll：根据正则表达式替换字符串</details>
 <h3 id="String-StringBuffer-StringBuilder区别">String, StringBuffer, StringBuilder区别</h3>
-<p>首先总结三者的不同</p>
-<p>1.基本区别</p>
-<p>String的对象不可变，StringBuffer和StringBuilder的对象是可变的</p>
-<p>2.性能区别</p>
-<p>三者中StringBuilder执行速度最佳，StringBuffer次之，String的执行速度最慢（String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，String对象一旦创建后该对象是不可更改的，后两者的对象是变量是可以更改的）</p>
-<p>3.安全区别</p>
-<p>String、StringBuffer是线程安全的，StringBuilder是线程不安全的（所以如果程序是单线程的使用StringBuilder效率高，如果是多线程使用StringBuffer或者String）</p>
-<p>其次总结下这三者的相同：</p>
-<p>1.三者在java中都是用来处理字符串的</p>
-<p>2.三个类都被final修饰，因此都是不可继承的</p>
-<p>3.StringBuilder与StringBuffer有公共父类AbstractStringBuilder(抽象类)</p>
+<details>
+    <summary>答案</summary>
+首先总结三者的不同<br>
+1.基本区别<br>
+String的对象不可变，StringBuffer和StringBuilder的对象是可变的<br>
+2.性能区别<br>
+三者中StringBuilder执行速度最佳，StringBuffer次之，String的执行速度最慢（String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，String对象一旦创建后该对象是不可更改的，后两者的对象是变量是可以更改的）<br>
+3.安全区别<br>
+String、StringBuffer是线程安全的，StringBuilder是线程不安全的（所以如果程序是单线程的使用StringBuilder效率高，如果是多线程使用StringBuffer或者String）<br>
+其次总结下这三者的相同：<br>
+1.三者在java中都是用来处理字符串的<br>
+2.三个类都被final修饰，因此都是不可继承的<br>
+3.StringBuilder与StringBuffer有公共父类AbstractStringBuilder(抽象类)</details>
 <h3 id="intern方法及String对象数目">intern方法及String对象数目</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Programming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Programming&quot;</span>);</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span> + <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s3 + s4; </span><br><span class="line"> System.out.println(s1 == s2); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s5); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s1 == s6); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s6.intern()); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s2 == s2.intern()); <span class="comment">//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<details>
+    <summary>答案</summary>
+    false<br>
+ 	true<br>
+ 	false<br>
+ 	true<br>
+ 	false</details>
 <p>题目</p>
 <p>以下语句创建多少个对象？</p>
 <p>String s = “abc” + new String(“def”);</p>
-<p>答案</p>
-<p>创建4个String对象</p>
-<p>分析</p>
-<p>JVM先在String池中创建2个String对象存储&quot;abc&quot;和&quot;def&quot;<br>
-遇到new关键字，再在内存堆上创建1个String对象存储&quot;def&quot;，其char value[]则指向常量池中的char value[]；两个字符串相加会在堆上创建1个String对象&quot;abcdef&quot;。（因为没有显式使用双引号指定，也没有调用intern，所以字符串池里边目前没有“abcdef”对象）</p>
+<details>
+    <summary>答案以及解析</summary>
+    答案：创建4个String对象<br>
+    分析：JVM先在String池中创建2个String对象存储"abc"和"def"，遇到new关键字，再在内存堆上创建1个String对象存储"def"，其char value[]则指向常量池中的char value[]；两个字符串相加会在堆上创建1个String对象"abcdef"。（因为没有显式使用双引号指定，也没有调用intern，所以字符串池里边目前没有“abcdef”对象）</details>
 <h3 id="如何修改String对象的数据？">如何修改String对象的数据？</h3>
 <p>不可变的含义是内部数据不可变，而不是说引用不可变。</p>
 <p>String类使用char value[]来存字符数据，它的类型为：private final char value[];</p>
