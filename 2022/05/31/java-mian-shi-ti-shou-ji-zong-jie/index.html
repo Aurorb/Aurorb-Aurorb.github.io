@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="七天挑战Web前后端分离项目-Day1">
+    <meta name="keywords" content="JAVA面试题收集总结">
     <meta name="description" content="林广的个人博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>七天挑战前后端分离项目-Day1 | Aurorb</title>
+    <title>JAVA面试题收集总结 | Aurorb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -288,12 +288,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">七天挑战前后端分离项目-Day1</h1>
+                    <h1 class="description center-align post-title">JAVA面试题收集总结</h1>
                 </div>
             </div>
         </div>
@@ -409,12 +409,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Web/">
-                                <span class="chip bg-color">Web</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/%E5%AE%9E%E6%88%98/">
-                                <span class="chip bg-color">实战</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                <span class="chip bg-color">面试</span>
                             </a>
                         
                     </div>
@@ -429,7 +429,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-27
+                    2022-05-31
                 </div>
                 
 
@@ -450,133 +450,179 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-前期准备">1.前期准备</h2>
-<h3 id="1-1-下载并安装Vue-js">1.1 下载并安装Vue.js</h3>
+                <h1>前言</h1>
+<p>资料为csdn收集整理，仅自用</p>
+<h1>基础</h1>
+<h2 id="String">String</h2>
+<h3 id="String的replace与replaceall区别？">String的replace与replaceall区别？</h3>
 <ul class="lvl-0">
 <li class="lvl-2">
-<p>官网链接：<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/">https://v3.cn.vuejs.org/</a></p>
+<p>replace：替换字符串</p>
 </li>
 <li class="lvl-2">
-<p>安装与使用：<a target="_blank" rel="noopener" href="https://v3.cn.vuejs.org/guide/introduction.html">https://v3.cn.vuejs.org/guide/introduction.html</a></p>
+<p>replaceAll：根据正则表达式替换字符串</p>
 </li>
 </ul>
-<h3 id="1-2-下载并安装node-js">1.2 下载并安装node.js</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>官网链接：<a target="_blank" rel="noopener" href="https://nodejs.org/en/">https://nodejs.org/en/</a></p>
+<h3 id="String-StringBuffer-StringBuilder区别">String, StringBuffer, StringBuilder区别</h3>
+<p>首先总结三者的不同</p>
+<p>1.基本区别</p>
+<p>String的对象不可变，StringBuffer和StringBuilder的对象是可变的</p>
+<p>2.性能区别</p>
+<p>三者中StringBuilder执行速度最佳，StringBuffer次之，String的执行速度最慢（String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，String对象一旦创建后该对象是不可更改的，后两者的对象是变量是可以更改的）</p>
+<p>3.安全区别</p>
+<p>String、StringBuffer是线程安全的，StringBuilder是线程不安全的（所以如果程序是单线程的使用StringBuilder效率高，如果是多线程使用StringBuffer或者String）</p>
+<p>其次总结下这三者的相同：</p>
+<p>1.三者在java中都是用来处理字符串的</p>
+<p>2.三个类都被final修饰，因此都是不可继承的</p>
+<p>3.StringBuilder与StringBuffer有公共父类AbstractStringBuilder(抽象类)</p>
+<h3 id="intern方法及String对象数目">intern方法及String对象数目</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Programming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Programming&quot;</span>);</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span> + <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	 <span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s3 + s4; </span><br><span class="line"> System.out.println(s1 == s2); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s5); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s1 == s6); <span class="comment">//false</span></span><br><span class="line"> System.out.println(s1 == s6.intern()); <span class="comment">//true</span></span><br><span class="line"> System.out.println(s2 == s2.intern()); <span class="comment">//false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>题目</p>
+<p>以下语句创建多少个对象？</p>
+<p>String s = “abc” + new String(“def”);</p>
+<p>答案</p>
+<p>创建4个String对象</p>
+<p>分析</p>
+<p>JVM先在String池中创建2个String对象存储&quot;abc&quot;和&quot;def&quot;<br>
+遇到new关键字，再在内存堆上创建1个String对象存储&quot;def&quot;，其char value[]则指向常量池中的char value[]；两个字符串相加会在堆上创建1个String对象&quot;abcdef&quot;。（因为没有显式使用双引号指定，也没有调用intern，所以字符串池里边目前没有“abcdef”对象）</p>
+<h3 id="如何修改String对象的数据？">如何修改String对象的数据？</h3>
+<p>不可变的含义是内部数据不可变，而不是说引用不可变。</p>
+<p>String类使用char value[]来存字符数据，它的类型为：private final char value[];</p>
+<p>看上去它是不可更改的，因为是final类型。注意：final只是表示不能指向其他地址，它里边的内容是可以更改的。</p>
+<p>结论：String是可以更改的，使用反射，value.setAccessible(true)，然后修改它即可。</p>
+<h2 id="Static">Static</h2>
+<h3 id="static的5种用法">static的5种用法</h3>
+<ol>
+<li class="lvl-3">
+<p>修饰静态属性；</p>
 </li>
-<li class="lvl-2">
-<p>安装与使用：<a target="_blank" rel="noopener" href="https://nodejs.org/en/docs/">https://nodejs.org/en/docs/</a></p>
+<li class="lvl-3">
+<p>修饰静态方法；</p>
 </li>
-<li class="lvl-2">
-<p>验证是否安装：node -v</p>
+<li class="lvl-3">
+<p>修饰静态内部类；</p>
 </li>
-<li class="lvl-2">
-<p>建议下载14版本</p>
-<p><img src="./001.png" alt=""></p>
+<li class="lvl-3">
+<p>静态导包（类或者方法，可以通配）；</p>
 </li>
-</ul>
-<h3 id="1-3-确认是否有npm">1.3 确认是否有npm</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>验证npm存在：npm -v</p>
-<p><img src="./002.png" alt=""></p>
+<li class="lvl-3">
+<p>标记静态代码块。</p>
 </li>
-</ul>
-<h3 id="1-4-安装vue框架">1.4 安装vue框架</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>安装命令：npm install -g @vue/lic</p>
+</ol>
+<h3 id="为什么静态方法不能调用非静态方法和变量？">为什么静态方法不能调用非静态方法和变量？</h3>
+<p>与类加载顺序有关，加载静态方法时，非静态的未初始化。</p>
+<h3 id="synchronized用于静态方法与普通方法有区别吗？">synchronized用于静态方法与普通方法有区别吗？</h3>
+<p>synchronized修饰普通方法时用的锁是this，即以当前对象为锁。用static修饰的同步函数使用的锁为Saler.class。即当前类为锁。这是由于static修饰的方法在进行类加载时不一定在堆内存中产生类的实例对象，但一定会有该类的的字节码文件对象所以用static修饰的同步函数使用的锁是类名.class。</p>
+<h2 id="异常">异常</h2>
+<h3 id="异常类型">异常类型</h3>
+<p><img src="./001.png" alt="./001.png"></p>
+<h3 id="catch里return了，finally是否执行？">catch里return了，finally是否执行？</h3>
+<p>finally一定会执行</p>
+<p>try-catch-finally中return的执行情况：</p>
+<ol>
+<li class="lvl-3">
+<p>在try中没有异常的情况下try、catch、finally的执行顺序 try — finally</p>
 </li>
-</ul>
-<h3 id="1-5-创建第一个项目">1.5 创建第一个项目</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>vue create 项目名</p>
-<p><img src="./003.png" alt=""></p>
+<li class="lvl-3">
+<p>如果try中有异常，执行顺序是try — catch — finally</p>
 </li>
-<li class="lvl-2">
-<p>选择Manually select features</p>
-<p><img src="./004.png" alt=""></p>
+<li class="lvl-3">
+<p>如果try中没有异常并且try中有return这时候正常执行顺序是try ---- finally — return</p>
 </li>
-<li class="lvl-2">
-<p>选择Router和Vuex（空格选择） 勾选掉Linter/Pormatter</p>
-<p><img src="./005.png" alt=""></p>
+<li class="lvl-3">
+<p>如果try中有异常并且try中有return这时候正常执行顺序是try----catch—finally— return</p>
 </li>
-<li class="lvl-2">
-<p>选择3.X版本的Vue</p>
-<p><img src="./006.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>选择history 输入y</p>
-<p><img src="./007.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>选择In package.json</p>
-<p><img src="./008.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>自行选择是否保存</p>
-<p><img src="./009.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>创建项目成功</p>
-<p><img src="./010.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>初次运行查看</p>
-<p><img src="./011.png" alt=""></p>
-<p><img src="./012.png" alt=""></p>
-</li>
-</ul>
-<h3 id="1-6-下载idea">1.6 下载idea</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><img src="./013.png" alt=""></p>
-</li>
-</ul>
-<h2 id="2-运行项目">2. 运行项目</h2>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>将项目文件夹拖入idea程序</p>
-</li>
-</ul>
-<p><img src="./014.png" alt=""></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>在scripts中 serve后加–open实现运行项目自动打开页面</p>
-<p><img src="./01.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>可能自动打开失败</p>
-<p><img src="./016.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>进入该文件修改host</p>
-<p><img src="./017.png" alt=""></p>
-</li>
-<li class="lvl-2">
-<p>修改之后可以实现自动打开</p>
-<p><img src="./018.png" alt=""></p>
-</li>
-</ul>
-<h2 id="3-进行项目编写">3.进行项目编写</h2>
-<h3 id="3-1-页面编写">3.1 页面编写</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>使用Element-plus</p>
-</li>
-<li class="lvl-2">
-<p>官网链接：<a target="_blank" rel="noopener" href="https://element-plus.gitee.io/zh-CN/#/zh-CN">https://element-plus.gitee.io/zh-CN/#/zh-CN</a></p>
-</li>
-<li class="lvl-2">
-<p>安装命令：npm install element-plus --save</p>
-</li>
-<li class="lvl-2">
-<p>复制代码进入main中进行快速上手</p>
-<p><img src="./019.png" alt=""></p>
-</li>
-</ul>
+</ol>
+<h2 id="IO">IO</h2>
+<h3 id="字节流与字符流区别？">字节流与字符流区别？</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><em><strong>*项*</strong></em></th>
+<th><em><strong>*字节流*</strong></em></th>
+<th><em><strong>*字符流*</strong></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em><strong>*是否使用缓冲*</strong></em></td>
+<td>否</td>
+<td>是。若频繁对一个资源进行IO操作，会先把需要操作的数据暂时放入内存中，以后直接从内存中读取数据。这样可以避免多次的IO操作，提高效率。</td>
+</tr>
+<tr>
+<td style="text-align:left"><em><strong>*存在位置*</strong></em></td>
+<td>可存在于文件、内存中。硬盘上的所有文件都是以字节形式存在的。</td>
+<td>只存在于内存中。</td>
+</tr>
+<tr>
+<td style="text-align:left"><em><strong>*使用场景*</strong></em></td>
+<td>适合操作文本文件之外的文件。例：图片、音频、视频。</td>
+<td>适合操作文本文件时使用。（效率高。因为有缓存）</td>
+</tr>
+<tr>
+<td style="text-align:left"><em><strong>*Java相关类*</strong></em></td>
+<td>InputStream、OutputStream</td>
+<td>Reader、Writer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="BIO-NIO-AIO-区别？">BIO, NIO, AIO 区别？</h3>
+<table>
+<thead>
+<tr>
+<th><em><strong>*项*</strong></em></th>
+<th><em><strong>*BIO (Block IO)*</strong></em></th>
+<th><em><strong>*NIO (New IO)*</strong></em></th>
+<th><em><strong>*AIO(Asynchronous I/O)*</strong></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><strong>*JDK版本*</strong></em></td>
+<td>所有版本</td>
+<td>JDK1.4及之后</td>
+<td>JDK1.7及之后</td>
+</tr>
+<tr>
+<td><em><strong>*异步/阻塞*</strong></em></td>
+<td>同步阻塞****一个连接一个线程。****线程发起IO请求，不管内核是否准备好IO操作，从发起请求起，线程一直阻塞，直到操作完成。 数据的读取写入必须阻塞在一个线程内等待其完成。</td>
+<td>同步阻塞/非阻塞****一个请求一个线程****。客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。用户进程也需要时不时的询问IO操作是否就绪，这要求用户进程不停的去询问。</td>
+<td>异步非阻塞。<em><strong>*一个有效请求一个线程*</strong></em>。用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。</td>
+</tr>
+<tr>
+<td><em><strong>*使用场景*</strong></em></td>
+<td></td>
+<td>适用于连接数目多且连接比较短（轻操作）的操作。例如：聊天服务器。</td>
+<td>适用于连接数目多且连接比较长（重操作）的架构。例如：相册服务器。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="JDK8">JDK8</h2>
+<h3 id="JDK8新特性">JDK8<strong>新特性</strong></h3>
+<p>接口允许default和static；lambda；stream；时间新API（LocalDateTime等）CompletableFuture；等</p>
+<h3 id="JDK8接口的default和static">JDK8接口的default和static</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface InterfaceDemo &#123;</span><br><span class="line">    // static修饰符定义静态方法  </span><br><span class="line">    static void staticMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的静态方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // default修饰符定义默认方法  </span><br><span class="line">    default void defaultMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的默认方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一、default</p>
+<p>default说白了就是提供接口的默认实现，这样我们的实现类就不一定需要全部实现接口中的方法，一些常规通用的方法实现可以直接在接口层面提前处理，当然你想覆盖也是可以的。（有点抽象类的意思）</p>
+<p>二、static</p>
+<p>static就是常规的静态方法，允许通过接口直接调用，不能通过实现类去调用，跟普通的类的静态方法一样的用法。</p>
+<h3 id="JDK8-Stream-API-流操作包括哪些部分？项目中怎么用的Stream？">JDK8 Stream API 流操作包括哪些部分？项目中怎么用的Stream？</h3>
+<p>Stream操作步骤</p>
+<p>创建Stream=&gt; 转换Stream（中间操作）=&gt; 产生结果（终止操作）</p>
+<p>注意：这只是一般操作。实际编程时，创建必须有，而中间操作与终止操作是可选的。</p>
+<p><code>Stream</code> 流可以通过集合和数组进行创建！<br>
+1、通过 <code>java.util.Collection.stream()</code> 方法用集合创建流</p>
+<p>2、使用 <code>java.util.Arrays.stream(T[] array)</code> 方法用数组创建流</p>
+<p>3、使用Stream的静态方法：<code>of()、iterate()、generate()</code></p>
+<h2 id="语法">语法</h2>
+<h3 id="项目中对泛型的使用">项目中对泛型的使用</h3>
+<h3 id="抽象类与接口的区别？">抽象类与接口的区别？</h3>
+<h2 id="类库">类库</h2>
+<h3 id="SimpleDate线程安全吗？怎么解决？">SimpleDate线程安全吗？怎么解决？</h3>
+<h2 id="反射">反射</h2>
+<h3 id="Java反射：forName和classLoader的区别">Java反射：forName和classLoader的区别</h3>
+<h3 id="反射机制中可以获取private成员的值吗？">反射机制中可以获取private成员的值吗？</h3>
+<h3 id="拆箱与装箱">拆箱与装箱</h3>
 
                 
             </div>
@@ -603,7 +649,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Aurorb.github.io/2022/05/27/qi-tian-tiao-zhan-qian-hou-duan-fen-chi-xiang-mu-day1/">http://Aurorb.github.io/2022/05/27/qi-tian-tiao-zhan-qian-hou-duan-fen-chi-xiang-mu-day1/</a>
+                    <a href="http://Aurorb.github.io/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/">http://Aurorb.github.io/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -641,12 +687,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Web/">
-                                    <span class="chip bg-color">Web</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/%E5%AE%9E%E6%88%98/">
-                                    <span class="chip bg-color">实战</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                    <span class="chip bg-color">面试</span>
                                 </a>
                             
                         </div>
@@ -821,13 +867,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/05/27/qi-tian-tiao-zhan-qian-hou-duan-fen-chi-xiang-mu-day1/">
+                <a href="/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="七天挑战前后端分离项目-Day1">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="JAVA面试题收集总结">
                         
-                        <span class="card-title">七天挑战前后端分离项目-Day1</span>
+                        <span class="card-title">JAVA面试题收集总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -838,7 +884,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-31
                             </span>
                         <span class="publish-author">
                             
@@ -852,12 +898,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Web/">
-                        <span class="chip bg-color">Web</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E5%AE%9E%E6%88%98/">
-                        <span class="chip bg-color">实战</span>
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
                     </a>
                     
                 </div>
@@ -1088,7 +1134,7 @@
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
@@ -1117,6 +1163,50 @@
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2022";
+                    var startMonth = "5";
+                    var startDate = "26";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             

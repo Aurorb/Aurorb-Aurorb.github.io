@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: Web, Aurorb">
+    <meta name="keywords" content="标签: 面试, Aurorb">
     <meta name="description" content="林广的个人博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: Web | Aurorb</title>
+    <title>标签: 面试 | Aurorb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -339,19 +339,19 @@
             <div class="tag-chips">
                 
                 
-                <a href="/tags/Web/" title="Web: 1">
+                <a href="/tags/Java/" title="Java: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="Web" style="background-color: #F9EBEA;">Web
+                             chip-default "
+                            data-tagname="Java" style="background-color: #F9EBEA;">Java
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E5%AE%9E%E6%88%98/" title="实战: 1">
+                <a href="/tags/%E9%9D%A2%E8%AF%95/" title="面试: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="实战" style="background-color: #F5EEF8;">实战
+                             chip-active "
+                            data-tagname="面试" style="background-color: #F5EEF8;">面试
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -376,21 +376,21 @@
         <div class="row tags-posts">
             
             
-            <div class="article tag-post col s12 m6 l4" data-tags="Web, 实战" data-aos="fade-up">
+            <div class="article tag-post col s12 m6 l4" data-tags="Java, 面试" data-aos="fade-up">
                 <div class="card">
-                    <a href="/2022/05/27/qi-tian-tiao-zhan-qian-hou-duan-fen-chi-xiang-mu-day1/">
+                    <a href="/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="七天挑战前后端分离项目-Day1">
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="JAVA面试题收集总结">
                             
-                            <span class="card-title">七天挑战前后端分离项目-Day1</span>
+                            <span class="card-title">JAVA面试题收集总结</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-31
                             </span>
                             <span class="publish-author">
                                 
@@ -462,7 +462,7 @@
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
 
     
-    <div class="container row center-align" style="margin-bottom: 0px !important;">
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
@@ -491,6 +491,50 @@
             </span>
             
             <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2022";
+                    var startMonth = "5";
+                    var startDate = "26";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
             
             <br>
             
