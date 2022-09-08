@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JAVA面试题收集总结">
+    <meta name="keywords" content="Aurorb">
     <meta name="description" content="林广的个人博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JAVA面试题收集总结 | Aurorb</title>
+    <title>Aurorb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -288,12 +288,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JAVA面试题收集总结</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -407,17 +407,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                <span class="chip bg-color">面试</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -429,7 +421,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-31
+                    2022-09-08
                 </div>
                 
 
@@ -450,199 +442,176 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>前言</h1>
-<p>资料为csdn收集整理，仅自用</p>
-<h1>基础</h1>
-<h2 id="String">String</h2>
-<h3 id="String的replace与replaceall区别？">String的replace与replaceall区别？</h3>
-<details>
-    <summary>答案</summary>
-    - replace：替换字符串<br>
-    - replaceAll：根据正则表达式替换字符串</details>
-<h3 id="String-StringBuffer-StringBuilder区别">String, StringBuffer, StringBuilder区别</h3>
-<details>
-    <summary>答案</summary>
-首先总结三者的不同<br>
-1.基本区别<br>
-String的对象不可变，StringBuffer和StringBuilder的对象是可变的<br>
-2.性能区别<br>
-三者中StringBuilder执行速度最佳，StringBuffer次之，String的执行速度最慢（String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，String对象一旦创建后该对象是不可更改的，后两者的对象是变量是可以更改的）<br>
-3.安全区别<br>
-String、StringBuffer是线程安全的，StringBuilder是线程不安全的（所以如果程序是单线程的使用StringBuilder效率高，如果是多线程使用StringBuffer或者String）<br>
-其次总结下这三者的相同：<br>
-1.三者在java中都是用来处理字符串的<br>
-2.三个类都被final修饰，因此都是不可继承的<br>
-3.StringBuilder与StringBuffer有公共父类AbstractStringBuilder(抽象类)</details>
-<h3 id="intern方法及String对象数目">intern方法及String对象数目</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据下面代码判断输出结果</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;Programming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;Programming&quot;</span>);</span><br><span class="line">	<span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s5</span> <span class="operator">=</span> <span class="string">&quot;Program&quot;</span> + <span class="string">&quot;ming&quot;</span>;</span><br><span class="line">	<span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> s3 + s4;</span><br><span class="line">    System.out.println(s1 == s2);</span><br><span class="line">    System.out.println(s1 == s5);</span><br><span class="line">    System.out.println(s1 == s6);</span><br><span class="line">    System.out.println(s1 == s6.intern());</span><br><span class="line">    System.out.println(s2 == s2.intern()); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<details>
-    <summary>答案</summary>
-    false<br>
- 	true<br>
- 	false<br>
- 	true<br>
- 	false</details>
-<p>题目</p>
-<p>以下语句创建多少个对象？</p>
-<p>String s = “abc” + new String(“def”);</p>
-<details>
-    <summary>答案以及解析</summary>
-    答案：创建4个String对象<br>
-    分析：JVM先在String池中创建2个String对象存储"abc"和"def"，遇到new关键字，再在内存堆上创建1个String对象存储"def"，其char value[]则指向常量池中的char value[]；两个字符串相加会在堆上创建1个String对象"abcdef"。（因为没有显式使用双引号指定，也没有调用intern，所以字符串池里边目前没有“abcdef”对象）</details>
-<h3 id="如何修改String对象的数据？">如何修改String对象的数据？</h3>
-<details>
-    <summary>答案</summary>
-不可变的含义是内部数据不可变，而不是说引用不可变。<br>
-String类使用char value[]来存字符数据，它的类型为：private final char value[];<br>
-看上去它是不可更改的，因为是final类型。注意：final只是表示不能指向其他地址，它里边的内容是可以更改的。<br>
-结论：String是可以更改的，使用反射，value.setAccessible(true)，然后修改它即可。</details>
-<h2 id="Static">Static</h2>
-<h3 id="static的5种用法">static的5种用法</h3>
-<details>
-    <summary>答案</summary>
-1. 修饰静态属性；<br>
-2. 修饰静态方法；<br>
-3. 修饰静态内部类；<br>
-4. 静态导包（类或者方法，可以通配）；<br>
-5. 标记静态代码块。</details>
-<h3 id="为什么静态方法不能调用非静态方法和变量？">为什么静态方法不能调用非静态方法和变量？</h3>
-<details>
-    <summary>答案</summary>
-与类加载顺序有关，加载静态方法时，非静态的未初始化。</details>
-<h3 id="synchronized用于静态方法与普通方法有区别吗？">synchronized用于静态方法与普通方法有区别吗？</h3>
-<details>
-    <summary>答案</summary>
-synchronized修饰普通方法时用的锁是this，即以当前对象为锁。用static修饰的同步函数使用的锁为Saler.class。即当前类为锁。这是由于static修饰的方法在进行类加载时不一定在堆内存中产生类的实例对象，但一定会有该类的的字节码文件对象所以用static修饰的同步函数使用的锁是类名.class。</details>
-<h2 id="异常">异常</h2>
-<h3 id="异常类型">异常类型</h3>
-<p><img src="./001.png" alt="./001.png"></p>
-<h3 id="catch里return了，finally是否执行？">catch里return了，finally是否执行？</h3>
-<details>
-    <summary>答案</summary>
-finally一定会执行<br>
-try-catch-finally中return的执行情况：<br>
-1. 在try中没有异常的情况下try、catch、finally的执行顺序 try --- finally<br>
-2. 如果try中有异常，执行顺序是try --- catch --- finally<br>
-3. 如果try中没有异常并且try中有return这时候正常执行顺序是try ---- finally --- return<br>
-4. 如果try中有异常并且try中有return这时候正常执行顺序是try----catch---finally--- return</details>
-<h2 id="IO">IO</h2>
-<h3 id="字节流与字符流区别？">字节流与字符流区别？</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><em><strong>*项*</strong></em></th>
-<th><em><strong>*字节流*</strong></em></th>
-<th><em><strong>*字符流*</strong></em></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><em><strong>*是否使用缓冲*</strong></em></td>
-<td>否</td>
-<td>是。若频繁对一个资源进行IO操作，会先把需要操作的数据暂时放入内存中，以后直接从内存中读取数据。这样可以避免多次的IO操作，提高效率。</td>
-</tr>
-<tr>
-<td style="text-align:left"><em><strong>*存在位置*</strong></em></td>
-<td>可存在于文件、内存中。硬盘上的所有文件都是以字节形式存在的。</td>
-<td>只存在于内存中。</td>
-</tr>
-<tr>
-<td style="text-align:left"><em><strong>*使用场景*</strong></em></td>
-<td>适合操作文本文件之外的文件。例：图片、音频、视频。</td>
-<td>适合操作文本文件时使用。（效率高。因为有缓存）</td>
-</tr>
-<tr>
-<td style="text-align:left"><em><strong>*Java相关类*</strong></em></td>
-<td>InputStream、OutputStream</td>
-<td>Reader、Writer</td>
-</tr>
-</tbody>
-</table>
-<h3 id="BIO-NIO-AIO-区别？">BIO, NIO, AIO 区别？</h3>
-<table>
-<thead>
-<tr>
-<th><em><strong>*项*</strong></em></th>
-<th><em><strong>*BIO (Block IO)*</strong></em></th>
-<th><em><strong>*NIO (New IO)*</strong></em></th>
-<th><em><strong>*AIO(Asynchronous I/O)*</strong></em></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><em><strong>*JDK版本*</strong></em></td>
-<td>所有版本</td>
-<td>JDK1.4及之后</td>
-<td>JDK1.7及之后</td>
-</tr>
-<tr>
-<td><em><strong>*异步/阻塞*</strong></em></td>
-<td>同步阻塞****一个连接一个线程。****线程发起IO请求，不管内核是否准备好IO操作，从发起请求起，线程一直阻塞，直到操作完成。 数据的读取写入必须阻塞在一个线程内等待其完成。</td>
-<td>同步阻塞/非阻塞****一个请求一个线程****。客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。用户进程也需要时不时的询问IO操作是否就绪，这要求用户进程不停的去询问。</td>
-<td>异步非阻塞。<em><strong>*一个有效请求一个线程*</strong></em>。用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了，不需要进行实际的IO读写操作，因为真正的IO读取或者写入操作已经由内核完成了。</td>
-</tr>
-<tr>
-<td><em><strong>*使用场景*</strong></em></td>
-<td></td>
-<td>适用于连接数目多且连接比较短（轻操作）的操作。例如：聊天服务器。</td>
-<td>适用于连接数目多且连接比较长（重操作）的架构。例如：相册服务器。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="JDK8">JDK8</h2>
-<h3 id="JDK8新特性">JDK8<strong>新特性</strong></h3>
-<details>
-    <summary>答案</summary>
-接口允许default和static；lambda；stream；时间新API（LocalDateTime等）CompletableFuture；等</details>
-<h3 id="JDK8接口的default和static">JDK8接口的default和static</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface InterfaceDemo &#123;</span><br><span class="line">    // static修饰符定义静态方法  </span><br><span class="line">    static void staticMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的静态方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // default修饰符定义默认方法  </span><br><span class="line">    default void defaultMethod() &#123;</span><br><span class="line">        System.out.println(&quot;接口中的默认方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一、default</p>
-<p>default说白了就是提供接口的默认实现，这样我们的实现类就不一定需要全部实现接口中的方法，一些常规通用的方法实现可以直接在接口层面提前处理，当然你想覆盖也是可以的。（有点抽象类的意思）</p>
-<p>二、static</p>
-<p>static就是常规的静态方法，允许通过接口直接调用，不能通过实现类去调用，跟普通的类的静态方法一样的用法。</p>
-<h3 id="JDK8-Stream-API-流操作包括哪些部分？项目中怎么用的Stream？">JDK8 Stream API 流操作包括哪些部分？项目中怎么用的Stream？</h3>
-<details>
-    <summary>答案</summary>
-Stream操作步骤<br>
-创建Stream=> 转换Stream（中间操作）=> 产生结果（终止操作）<br>
-注意：这只是一般操作。实际编程时，创建必须有，而中间操作与终止操作是可选的。<br>
-`Stream` 流可以通过集合和数组进行创建！<br>
-1、通过 `java.util.Collection.stream()` 方法用集合创建流<br>
-2、使用 `java.util.Arrays.stream(T[] array)` 方法用数组创建流<br>
-3、使用Stream的静态方法：`of()、iterate()、generate()`</details>
-<h2 id="语法">语法</h2>
-<h3 id="项目中对泛型的使用">项目中对泛型的使用</h3>
-<h3 id="抽象类与接口的区别？">抽象类与接口的区别？</h3>
-<h2 id="类库">类库</h2>
-<h3 id="SimpleDate线程安全吗？怎么解决？">SimpleDate线程安全吗？怎么解决？</h3>
-<h2 id="反射">反射</h2>
-<h3 id="Java反射：forName和classLoader的区别">Java反射：forName和classLoader的区别</h3>
-<h3 id="反射机制中可以获取private成员的值吗？">反射机制中可以获取private成员的值吗？</h3>
-<h3 id="拆箱与装箱">拆箱与装箱</h3>
-<h1>集合</h1>
-<h1>JVM</h1>
-<h1>多线程</h1>
-<h1>MYSQL</h1>
-<h1>设计模式</h1>
-<h1>中间件</h1>
-<h2 id="Redis">Redis</h2>
-<h2 id="MQ">MQ</h2>
-<h2 id="Shiro">Shiro</h2>
-<h1>框架</h1>
-<h2 id="Spring">Spring</h2>
-<h2 id="SpringBoot">SpringBoot</h2>
-<h2 id="MyBatis">MyBatis</h2>
-<h1>分布式</h1>
-<h2 id="综合">综合</h2>
-<h2 id="SpringCloud">SpringCloud</h2>
-<h1>ELK</h1>
-<h1>综合</h1>
-<h1>其他</h1>
-<h1>要问对方的问题</h1>
-<p>问研发加班时间。上下班时间，中午休息多久（这个问研发比较准，hr可能知道的不准）技术栈是单体还是分布式。（这都2021年了，还不是分布式的话，不建议去了）是否前后端分离。技术栈是否够新。如果技术栈里有下边这些玩意，不要去了，这都老掉牙了。前端：struts、jsp （现在都用Vue、React、bootstrap这些了）后端：ssh（现在都是ssm了）是否用了小众技术。若有如下这些，不建议去了（屠龙术会了有什么用呢）。网络管制有的公司有网络管制。连博客都不让写。问领导</p>
-<p>部门研发人员组成后端前端分别多少人。后端若低于5人，不太好。后端是否都是用Java。（有的公司是PHP+Java，需要把PHP代码迁移到Java）主要业务是怎样的问hr</p>
-<p>社保公积金五险一金缴纳基数及比例（小公司可能按最低基数缴纳）试用期是否缴纳五险一金（有差劲的公司试用期不缴纳）几号发工资大部分公司10号；少部分15号试用期薪资发多少大部分公司试用期前三个月发80%<br>
-年终奖保底几个月不要问平均，问保底比较靠谱。举例：朋友所在公司：入职前说平均2个月年终，结果只发了1个月年假和全薪病假分别多少天小公司一般没有全薪病假，可能病假期间薪资打折一年几次调薪</p>
+                <h3 id="JDK，JRE，JVM三者之间的关系，以及JDK、JRE包含的主要结构有哪些">JDK，JRE，JVM三者之间的关系，以及JDK、JRE包含的主要结构有哪些</h3>
+<p>关系： JDK包含JRE，JRE包含JVM</p>
+<p>结构：JDK=JRE+Java的开发工具（javac.exe、java.exe、javadoc.exe等工具）</p>
+<p>JRE=JVM+Java的核心类库</p>
+<h3 id="为什么要配置path环境变量？如何配置？">为什么要配置path环境变量？如何配置？</h3>
+<p>方便我们在使用命令行时，不论命令行的当前目录在哪个位置都能直接使用javac.exe或者java.exe等命令；</p>
+<p>JAVA_HOME = bin的上一层目录<br>
+path = %JAVA_HOME%\bin</p>
+<h3 id="常用的几个命令行操作都有哪些？-至少4个">常用的几个命令行操作都有哪些？(至少4个)</h3>
+<p>cd md rd del</p>
+<h3 id="标识符的命名规则有哪些？-不遵守，编译不通过。">标识符的命名规则有哪些？ -&gt;不遵守，编译不通过。</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>只能由字母（大小写，26个英文字母）、数字（0~9）、下划线“_”和“$”符组成。</p>
+</li>
+<li class="lvl-2">
+<p>数字不可以开头。</p>
+</li>
+<li class="lvl-2">
+<p>不可以使用关键字和保留字，但是可以包含关键字和保留字。</p>
+</li>
+<li class="lvl-2">
+<p>Java中严格区分字母大小写。</p>
+</li>
+<li class="lvl-2">
+<p>对长度无要求。</p>
+</li>
+<li class="lvl-2">
+<p>标识符内不能含有空格。</p>
+</li>
+</ul>
+<h3 id="标识符的命名规范有哪些？-不遵守，编译运行都可以通过">标识符的命名规范有哪些？ -&gt;不遵守，编译运行都可以通过</h3>
+<p>包名：当由多个单词组成时，所有单词都是小写。如aaa.bbb.ccc。类名、接口名：单词的首字母大写。如XxxYyyZzz。（大驼峰命名法）变量名、方法名：由多个单词组成时，第一个单词均小写，其它单词首字母大写。如xxxYyyZzz。（小驼峰命名法，简称驼峰法）常量名：所有字母均大写。且由多个单词组成时，单词之间用下划线“_”隔开。如XXX_YYY_ZZZ。</p>
+<h3 id="Java变量按照数据类型怎么划分？并指出Java的基本数据类型有哪8种，并指出各自占用的内存空间大小">Java变量按照数据类型怎么划分？并指出Java的基本数据类型有哪8种，并指出各自占用的内存空间大小</h3>
+<p>byte int short long</p>
+<p>char</p>
+<p>double float</p>
+<p>boolean</p>
+<p>类 接口 数组</p>
+<h3 id="说明基本数据类型变量之间自动类型提升的运算规则。">说明基本数据类型变量之间自动类型提升的运算规则。</h3>
+<p>byte、char、short --&gt;int–&gt;long–&gt; float–&gt; double<br>
+特别的：当byte、char、short三种类型的变量做运算时，结果为int类型</p>
+<h3 id="说明基本数据类型变量之间强制类型转换的使用规则和强转可能出现的问题">说明基本数据类型变量之间强制类型转换的使用规则和强转可能出现的问题</h3>
+<p>强制转化符：（）</p>
+<p>容量大转容量小-&gt;精度变小</p>
+<h3 id="和-的区别">&amp;和&amp;&amp;的区别</h3>
+<p>相同点：&amp;和&amp;&amp;都可以用作逻辑与的运算符，表示逻辑与（and）。</p>
+<p>不同点：</p>
+<p>（1）&amp;&amp;具有短路的功能，而&amp;不具备短路功能。</p>
+<p>（2）当&amp;运算符两边的表达式的结果都为true时，整个运算结果才为true。而&amp;&amp;运算符第一个表达式为false时，则结果为false，不再计算第二个表达式。</p>
+<p>（3）&amp;还可以用作位运算符，当&amp;操作符两边的表达式不是boolean类型时，&amp;表示按位与操作，我们通常使用0x0f来与一个整数进行&amp;运算，来获取该整数的最低4个bit位，例如：0x31 &amp; 0x0f的结果为0x01。</p>
+<h3 id="Switch中的表达式能使用的数据类型">Switch中的表达式能使用的数据类型</h3>
+<p>java5之前只能int、java5 可以枚举类型、java7可以string （Long一直不可以）</p>
+<h3 id="谈谈你对三元运算符、if-else和switch-case结构使用场景的理解">谈谈你对三元运算符、if-else和switch-case结构使用场景的理解</h3>
+<p>凡是可以使用三元或者switch-case的优先使用这两种（执行效率高）</p>
+<p>使用三元和switch-case写的都可以改成if-else。反之，不成立</p>
+<h3 id="说明break和continue使用上的相同点和不同点">说明break和continue使用上的相同点和不同点</h3>
+<p>break:switch-case 和 循环结构（结束当前循环），其后不可以声明执行语句</p>
+<p>continue: 循环结构（结束当次循环），其后不可以声明执行语句</p>
+<h3 id="写出一维数组初始化的两种方式">写出一维数组初始化的两种方式</h3>
+<p>int[] arr = new int[5];//动态初始化</p>
+<p>String[] arr1 = new String[]{“Tom”,“Jerry”,“Jim”};//静态初始化</p>
+<p>数组一旦初始化，其长度就是确定的。arr.length<br>
+数组长度一旦确定，就不可修改。</p>
+<h3 id="写出二维数组初始化的两种方式">写出二维数组初始化的两种方式</h3>
+<p>int[][] arr = new int[4][3];//动态初始化1<br>
+int[][] arr1 = new int[4][];//动态初始化2</p>
+<h3 id="不同类型的一维数组元素的默认初始化值各是多少">不同类型的一维数组元素的默认初始化值各是多少</h3>
+<p>整型 : 0<br>
+浮点型：0.0<br>
+char:0<br>
+boolean :false<br>
+引用类型：null</p>
+<h3 id="数组中常见的异常有哪些？">数组中常见的异常有哪些？</h3>
+<p>数组角标越界异常的情况</p>
+<p>空指针异常</p>
+<h3 id="面向对象思想编程内容的三条主线分别是什么">面向对象思想编程内容的三条主线分别是什么</h3>
+<p>① 类及类的成员：属性、方法、构造器；代码块、内部类</p>
+<p>② 面向对象的三大特征：封装、继承、多态</p>
+<p>③ 其它关键字：this,super,abstract,interface,static,final,package,import</p>
+<h3 id="谈谈你对面向对象中类和对象的理解，并指出二者的关系">谈谈你对面向对象中类和对象的理解，并指出二者的关系?</h3>
+<p>类：抽象的、概念上的内容</p>
+<p>对象：实实在在存在的一个个体。</p>
+<p>对象是由类派生出来的。</p>
+<h3 id="面向对象思想的体现一：类和对象的创建和执行操作有哪三步">面向对象思想的体现一：类和对象的创建和执行操作有哪三步</h3>
+<p>① 创建类</p>
+<p>② 类的实例化</p>
+<p>③ 调用对象的结构：”对象.属性” “对象.方法”</p>
+<h3 id="什么是方法的重载">什么是方法的重载</h3>
+<p>“两同一不同”：同一个类、相同方法名；参数列表不同。</p>
+<p>如何调用确定的方法：方法名-&gt;参数列表</p>
+<h3 id="说明Java方法中的参数传递机制的具体体现？">说明Java方法中的参数传递机制的具体体现？</h3>
+<p>基本数据类型：数据值</p>
+<p>引用数据类型：地址值</p>
+<h3 id="谈谈return关键字的使用">谈谈return关键字的使用</h3>
+<p>① 结束方法 ② 针对于有返回值的方法，return + 返回数据</p>
+<h3 id="代码的内存解析">代码的内存解析</h3>
+<p>内存结构：栈（局部变量）、堆(new出来的结构:对象(非static成员变量)、数组)</p>
+<p>变量：成员变量 vs 局部变量（方法内、方法形参、构造器内、构造器形参、代码块内）</p>
+<h3 id="构造器的作用是什么？使用中有哪些注意点-3条">构造器的作用是什么？使用中有哪些注意点(&gt;=3条)</h3>
+<p>①创建对象 ②初始化对象结构</p>
+<p>注意<br>
+1：系统为每个类都默认写了一个无参构造器，如果没啥大问题不必重写无参构造器。<br>
+2：如果重写无参构造器会覆盖掉系统自带的无参构造器。<br>
+3：如果写了含参构造器，必须重写一下无参构造器。<br>
+4：如果重写含参构造器，创建对象的时候一定要按照含参构造器中参数的顺序。<br>
+5：如果重写了含参构造器，可以使用重载思想，比如：可以传入半参或全参<br>
+6：如果重写了含参构造器：由于重载的局限性，需要注意一些细节：比如类有三个属性，属于两种数据类型。无法写两个参数类型顺序一样，参数赋值不一样的含两个参数的构造器。</p>
+<h3 id="关于类的属性的赋值，有几种赋值的方式。谈谈赋值的先后顺序">关于类的属性的赋值，有几种赋值的方式。谈谈赋值的先后顺序</h3>
+<p>默认初始化-显式初始化-构造器中初始化-对象.方法 或 对象.属性 给属性赋值</p>
+<p>1-2-3-4 1-3-2-4</p>
+<h3 id="this关键字可以用来调用哪些结构，简单说明一下其使用">this关键字可以用来调用哪些结构，简单说明一下其使用</h3>
+<p>this:属性、方法、构造器</p>
+<p>this:理解为当前对象，当前正在创建的对象</p>
+<h3 id="Java中目前学习涉及到的四种权限修饰符都有什么？并说明各自的权限范围">Java中目前学习涉及到的四种权限修饰符都有什么？并说明各自的权限范围</h3>
+<p>public，protected，default，private</p>
+<h3 id="什么是多态性？什么是虚拟方法调用？">什么是多态性？什么是虚拟方法调用？</h3>
+<p>对象的多态性：父类的引用指向子类的对象。</p>
+<p>编译时，看左边；运行时，看右边</p>
+<h3 id="一个类可以有几个直接父类？（只有一个）一个父类可有多少个子类？（多个）子类能获取直接父类的父类中的结构吗？（可以）子类能否获取父类中private权限的属性或方法？-可以的">一个类可以有几个直接父类？（只有一个）一个父类可有多少个子类？（多个）子类能获取直接父类的父类中的结构吗？（可以）子类能否获取父类中private权限的属性或方法？(可以的)</h3>
+<h3 id="方法的重写-override-overwrite-的具体规则有哪些">方法的重写(override/overwrite)的具体规则有哪些</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>两同：即方法名相同、形参列表相同</p>
+</li>
+<li class="lvl-2">
+<p>两小：子类方法的返回值类型比父类方法的返回值类型更小或相等；子类方法声明抛出的异常类比父类方法声明的异常类更小或相等</p>
+</li>
+<li class="lvl-2">
+<p>一大：子类方法的访问权限应比父类方法的访问权限更大或相等。</p>
+</li>
+</ul>
+<h3 id="super调用构造器，有哪些具体的注意点">super调用构造器，有哪些具体的注意点</h3>
+<p>this(形参列表)：本类重载的其它的构造器</p>
+<p>super(形参列表):调用父类中指定的构造器</p>
+<p>1.在子类中我们可以通过使用“super(参数列表)” 的方式，调用父类中已经声明的构造函数<br>
+2.“super(参数列表)” 的方式的使用必须声明在子类构造器的首行<br>
+3.因为 2 的特性，所以“this(形参列表)”和“super(形参列表)”在累的构造器中，只能二选一<br>
+4.如果在子类的构造器中不使用super，会默认加上“super()”，为了使其不报错，父类中最好加上一个不含参数的构造器</p>
+<h3 id="和-equals-有何区别？">== 和 equals()有何区别？</h3>
+<p>==操作符专门用来比较两个变量的值是否相等，也就是用于比较变量所对应的内存中所存储的数值是否相同</p>
+<p>equals方法是用于比较两个独立对象的内容是否相同，就好比去比较两个人的长相是否相同，它比较的两个对象是独立的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">String name;</span><br><span class="line"><span class="type">int</span> age;</span><br><span class="line">	<span class="comment">//重写其equals()方法	</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(obj == <span class="built_in">this</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">if</span>(obj <span class="keyword">instanceof</span> User)&#123;</span><br><span class="line">		<span class="type">User</span> <span class="variable">u</span> <span class="operator">=</span> (User)obj;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">this</span>.age == u.age &amp;&amp; <span class="built_in">this</span>.name.equals(u.name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="写出8种基本数据类型及其对应的包装类">写出8种基本数据类型及其对应的包装类</h3>
+<p>int  Integer<br>
+char Character</p>
+<h3 id="基本数据类型、包装类与String三者之间如何转换">基本数据类型、包装类与String三者之间如何转换</h3>
+<p>JDK 5.0 新特性：自动装箱、自动拆箱 Integer i = 10;</p>
+<p>基本数据类型、包装类—&gt;String: valueOf(Xxx xx)<br>
+String—&gt;基本数据类型、包装类:parseXxx(String s)</p>
+<h3 id="static-修饰的属性，相较于实例变量，有哪些特别之处-3点">static 修饰的属性，相较于实例变量，有哪些特别之处(&gt;=3点)</h3>
+<p>随着类的加载而加载；早于对象的创建；只要权限允许，可以通过”对象.static属性”的方式进行调用；存在于方法区的静态域</p>
+<h3 id="final-可以用来修饰哪些结构，分别表示什么意思">final 可以用来修饰哪些结构，分别表示什么意思</h3>
+<h3 id="代码实现单例模式的饿汉式">代码实现单例模式的饿汉式</h3>
+<h3 id="代码实现单例模式的懒汉式-目前还是线程不安全的。">代码实现单例模式的懒汉式 -目前还是线程不安全的。</h3>
+<h3 id="类的属性赋值的位置有哪些？先后顺序为何？">类的属性赋值的位置有哪些？先后顺序为何？</h3>
+<p>默认初始化</p>
+<p>显式初始化 、代码块中初始化</p>
+<p>构造器中初始化</p>
+<p>通过”对象.属性” 或”对象.方法”的方式赋值</p>
+<h3 id="abstract-能修饰哪些结构？-修饰以后，有什么特点？">abstract 能修饰哪些结构？ 修饰以后，有什么特点？</h3>
+<p>类、方法。</p>
+<p>类不能实例化，提供子类</p>
+<p>抽象方法，只定义了一种功能的标准。具体的执行，需要子类去实现。</p>
+<h3 id="接口是否能继承接口-抽象类是否能实现-implements-接口-抽象类是否能继承非抽象的类">接口是否能继承接口? 抽象类是否能实现(implements)接口? 抽象类是否能继承非抽象的类?</h3>
+<p>能，能，能</p>
+<h3 id="抽象类和接口有哪些共同点和区别？">抽象类和接口有哪些共同点和区别？</h3>
+<p>相同点：不能实例化，都可以被继承</p>
+<p>不同点：抽象类：有构造器。 接口：不能声明构造器</p>
+<p>多继承vs 单继承</p>
 
                 
             </div>
@@ -669,7 +638,7 @@ Stream操作步骤<br>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://Aurorb.github.io/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/">http://Aurorb.github.io/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/</a>
+                    <a href="http://Aurorb.github.io/2022/09/08/java-ji-chu/">http://Aurorb.github.io/2022/09/08/java-ji-chu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -706,15 +675,7 @@ Stream操作步骤<br>
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                    <span class="chip bg-color">面试</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -882,9 +843,10 @@ Stream操作步骤<br>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/09/08/java-ji-chu/">
                     <div class="card-image">
@@ -902,9 +864,9 @@ Stream操作步骤<br>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -913,6 +875,7 @@ Stream操作步骤<br>
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -923,13 +886,13 @@ Stream操作步骤<br>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/26/wo-de-bo-ke/">
+                <a href="/2022/05/31/java-mian-shi-ti-shou-ji-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="我的博客">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="JAVA面试题收集总结">
                         
-                        <span class="card-title">我的博客</span>
+                        <span class="card-title">JAVA面试题收集总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -940,7 +903,7 @@ Stream操作步骤<br>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-31
                             </span>
                         <span class="publish-author">
                             
@@ -953,8 +916,12 @@ Stream操作步骤<br>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/">
-                        <span class="chip bg-color">个人介绍</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
                     </a>
                     
                 </div>
